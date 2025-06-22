@@ -28,6 +28,23 @@ const updateCart = (req, res) => {
     })
 }
 
+db.categories.insertItem(newCategory, (err, doc) => {
+        if (err) {
+            res.status(500).json({ error: "Internal server error" });
+        } else {
+            res.status(201).json({ message: "Category created successfully", data: doc });
+        }
+    })
+
+    const deleteItem = (req, res) => {
+        const categoryId = req.params.id;
+        if (!mongojs.ObjectID.isValid(categoryId)) {
+            return res.status(400).json({ error: "Id is not valid" });
+        }
+    }
+
+
+
 const fetchCartsInCategory = (req, res) => {
     const categoryId = req.params.categoryId;
     if (!mongojs.ObjectID.isValid(categoryId)) {
