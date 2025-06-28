@@ -10,4 +10,24 @@ const getAllProducts = async (req, res) => {
     }
 };
 
-module.exports = { getAllProducts };
+const createProduct = async (req, res) => {
+    try {
+        const { name, description, price, image, category } = req.body;
+
+        const newProduct = new Product({
+            name,
+            description,
+            price,
+            image,
+            category
+        });
+
+        const savedProduct = await newProduct.save();
+        res.status(201).json(savedProduct);
+    } catch (err) {
+        console.error("Error creating product:", err);
+        res.status(500).json({ message: "Server error" });
+    }
+};
+
+module.exports = { getAllProducts, createProduct };

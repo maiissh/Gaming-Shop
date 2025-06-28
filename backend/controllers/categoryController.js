@@ -1,53 +1,33 @@
-const mongojs = require('mongojs');
-const db = mongojs("mongodb://127.0.0.1:27017/ToDo", ['categories', 'carts']);
+const Category = require("../models/category");
 
-const fetchCategories = (req, res) => {
-    db.categories.find((err, docs) => {
-        if (err) {
-            res.status(500).json({ error: "Internal server error" });
-        } else {
-            res.status(200).json({ message: "Categories fetched successfully", data: docs });
-        }
-    })
-}
+const fetchCategories = async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.status(200).json(categories);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch categories" });
+  }
+};
 
-const createCategory = (req, res) => {
-    const newCategory = {
-        name: req.body.name,
-    }
+const createCategory = async (req, res) => {
+  try {
+    const { name, description, image } = req.body;
+    const newCategory = new Category({ name, description, image });
+    const saved = await newCategory.save();
+    res.status(201).json(saved);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to create category" });
+  }
+};
 
-    db.categories.insert(newCategory, (err, doc) => {
-        if (err) {
-            res.status(500).json({ error: "Internal server error" });
-        } else {
-            res.status(201).json({ message: "Category created successfully", data: doc });
-        }
-    })
-}
+const deleteCategory = async (req, res) => {
+  try {
+    const deleted = await Category.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ error: "Category not found" });
+    res.status(200).json({ message: "Category deleted" });
+  } catch (err) {
+    res.status(500).json({ error: "Delete failed" });
+  }
+};
 
-const deleteCategory = (req, res) => {
-    const categoryId = req.params.id;
-    if (!mongojs.ObjectID.isValid(categoryId)) {
-        return res.status(400).json({ error: "Id is not valid" });
-    }
-
-    db.carts.find({ category_id: mongojs.ObjectID(categoryId) }, (err, docs) => {
-        if (err) {
-            return res.status(500).json({ error: "Internal server error" });
-        }
-        if (docs.length != 0) {
-            return res.status(400).json({ message: "Category NOT empty!" });
-        }
-        db.categories.remove({ _id: mongojs.ObjectID(categoryId) }, (err, result) => {
-            if (err) {
-                return res.status(500).json({ error: "Internal server error" });
-            }
-            if (result.n == 0) {
-                return res.status(404).json({ message: "Category NOT found!" });
-            }
-            res.status(200).json({ message: "Category deleted successfully." });
-        })
-    })
-}
-
-module.exports = { createCategory, deleteCategory, fetchCategories }
+module.exports = { fetchCategories, createCategory, deleteCategory };
