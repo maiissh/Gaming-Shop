@@ -1,6 +1,5 @@
 import React from "react";
 import "./NavBar.css";
-import logo from "../../logo.png"; // الصورة محفوظة داخل src/
 
 const NavBar = () => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -10,13 +9,13 @@ const NavBar = () => {
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <img src={logo} alt="Gaming Logo" className="logo-img" />
+                <img src="/favicon.png" alt="Logo" />
                 <h1>Gaming Shop</h1>
             </div>
             <div className="navbar-links">
                 <a href="/">Home</a>
                 <a href="/order">
-                    🛒 Cart ({totalItems}) - ₪{totalPrice.toFixed(2)}
+                     Cart🛒 ({totalItems}) - ₪{totalPrice.toFixed(2)}
                 </a>
             </div>
         </nav>
