@@ -1,94 +1,63 @@
-import React, { useEffect, useState } from "react";
-import "./order.css";
-import axios from "axios";
+import React from 'react';
+import './order.css';
 
-const Order = () => {
-    const [cart, setCart] = useState([]);
-    const [form, setForm] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        address: "",
-        shipping: "pickup"
-    });
 
-    // Load cart from localStorage when component mounts
-    useEffect(() => {
-        const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
-        setCart(savedCart);
-    }, []);
+// Dummy cart items for display
+const cartItems = [
+  {
+    id: 1,
+    name: 'Gaming Mouse',
+    image: '/images/mouse.jpg',
+    quantity: 2,
+    price: 39.99,
+  },
+  {
+    id: 2,
+    name: 'Gaming Headset',
+    image: '/images/headset.jpg',
+    quantity: 1,
+    price: 49.99,
+  },
+];
 
-    // Handle form field changes
-    const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
-    };
+function Order() {
+  const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-    // Submit order
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!form.name || !form.email || !form.phone || !form.address) {
-            alert("Please fill all required fields.");
-            return;
-        }
+  return (
+    <div className="order-page">
+      <h2>Order Summary</h2>
 
-        if (cart.length === 0) {
-            alert("Your cart is empty.");
-            return;
-        }
-
-        const orderData = {
-            customer: form,
-            items: cart,
-            shippingMethod: form.shipping
-        };
-
-        try {
-            const res = await axios.post("http://localhost:5000/api/orders", orderData);
-            alert("✅ Order submitted successfully! Order ID: " + res.data.orderId);
-            localStorage.removeItem("cart");
-            setCart([]);
-        } catch (err) {
-            alert("❌ Error submitting order.");
-            console.error(err);
-        }
-    };
-
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    return (
-        <div className="order-container">
-            <h2>Review Your Order</h2>
-            <div className="order-summary">
-                {cart.map(item => (
-                    <div className="order-item" key={item._id}>
-                        <img src={item.image} alt={item.name} />
-                        <div>
-                            <h4>{item.name}</h4>
-                            <p>Quantity: {item.quantity}</p>
-                            <p>Total: ₪{(item.price * item.quantity).toFixed(2)}</p>
-                        </div>
-                    </div>
-                ))}
-                <h3>Cart Total: ₪{total.toFixed(2)}</h3>
+      <div className="order-items">
+        {cartItems.map((item) => (
+          <div className="order-item" key={item.id}>
+            <img src={item.image} alt={item.name} />
+            <div className="item-details">
+              <h4>{item.name}</h4>
+              <p>Qty: {item.quantity}</p>
+              <p>${(item.price * item.quantity).toFixed(2)}</p>
             </div>
+          </div>
+        ))}
+      </div>
 
-            <form className="order-form" onSubmit={handleSubmit}>
-                <input type="text" name="name" placeholder="Full Name" value={form.name} onChange={handleChange} required />
-                <input type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
-                <input type="tel" name="phone" placeholder="Phone Number" value={form.phone} onChange={handleChange} required />
-                <input type="text" name="address" placeholder="Shipping Address" value={form.address} onChange={handleChange} required />
+      <form className="order-form">
+        <h3>Shipping Info</h3>
+        <input type="text" placeholder="Full Name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="tel" placeholder="Phone Number" required />
+        <input type="text" placeholder="Address" required />
 
-                <label>Shipping Method:</label>
-                <select name="shipping" value={form.shipping} onChange={handleChange}>
-                    <option value="pickup">Free Store Pickup</option>
-                    <option value="home">₪20 - Home Delivery (3-5 days)</option>
-                    <option value="express">₪50 - Express Delivery (1 day)</option>
-                </select>
+        <select required>
+          <option value="">Choose delivery method</option>
+          <option value="home">Home Delivery (3 days)</option>
+          <option value="pickup">Pickup (Free)</option>
+        </select>
 
-                <button type="submit">Submit Order</button>
-            </form>
-        </div>
-    );
-};
+        <div className="total-price">Total: ${total.toFixed(2)}</div>
+        <button type="submit">Place Order</button>
+      </form>
+    </div>
+  );
+}
 
 export default Order;

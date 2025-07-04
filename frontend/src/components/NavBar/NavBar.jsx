@@ -1,25 +1,20 @@
-import React from "react";
-import "./NavBar.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './NavBar.css';
 
-const NavBar = () => {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+<div className="page-content">{
 
-    return (
-        <nav className="navbar">
-            <div className="navbar-logo">
-                <img src="/favicon.png" alt="Logo" />
-                <h1>Gaming Shop</h1>
-            </div>
-            <div className="navbar-links">
-                <a href="/">Home</a>
-                <a href="/order">
-                     Cart🛒 ({totalItems}) - ₪{totalPrice.toFixed(2)}
-                </a>
-            </div>
-        </nav>
-    );
-};
-
+function NavBar() {
+  return (
+    <nav className="navbar">
+      <div className="logo"> GamingShop🎮</div>
+      <ul className="nav-links">
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/products">Products</Link></li>
+        <li><Link to="/order">Order</Link></li>
+      </ul>
+    </nav>
+  );
+}
+}</div>
 export default NavBar;

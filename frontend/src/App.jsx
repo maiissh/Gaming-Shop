@@ -1,26 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
-// Import main components
 import NavBar from "./components/NavBar/NavBar";
 import Category from "./components/category/category";
 import Order from "./components/order/order";
-
+import Product from "./components/product/product";
 import "./App.css";
 
 function App() {
   return (
     <Router>
-      {/* Top navigation bar with logo and cart */}
       <NavBar />
-
-      {/* Define the routes for the app */}
       <Routes>
-        {/* Home page displaying products */}
-        <Route path="/" element={<Category />} />
-
-        {/* Order page for reviewing and submitting the cart */}
-        <Route path="/order" element={<Order />} />
+        <Route path="/" element={<div className="page-content"><Category /></div>} />
+        <Route path="/products" element={<div className="page-content"><Product /></div>} />
+        <Route path="/order" element={<div className="page-content"><Order /></div>} />
       </Routes>
     </Router>
   );
