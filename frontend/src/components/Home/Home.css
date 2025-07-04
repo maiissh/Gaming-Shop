@@ -1,0 +1,41 @@
+.home-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 0 0 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #181a20 60%, #232946 100%);
+}
+.home-title-anim {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #00ffe7;
+  margin-bottom: 16px;
+  letter-spacing: 3px;
+  text-shadow: 0 0 16px #00ffe7, 0 0 32px #232946;
+  animation: neon-flicker 2s infinite alternate;
+}
+@keyframes neon-flicker {
+  0% { opacity: 1; }
+  100% { opacity: 0.85; text-shadow: 0 0 32px #00ffe7, 0 0 64px #232946; }
+}
+.home-setup-main {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 24px;
+  margin-bottom: 32px;
+  box-shadow: 0 0 32px #00ffe7;
+}
+.home-products {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+.home-products-title {
+  color: #fff;
+  font-size: 2em;
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: 2px;
+} 

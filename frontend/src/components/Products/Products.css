@@ -1,0 +1,16 @@
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin: 32px 0;
+  padding: 0 16px;
+}
+.fade-in-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+.fade-in {
+  opacity: 1 !important;
+  transform: none !important;
+} 

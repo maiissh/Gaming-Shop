@@ -1,55 +1,70 @@
 .navbar {
-    width: 100vw;
-    min-width: 100%;
-    background: #111;
-    color: #00ffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2.5vw;
-    box-sizing: border-box;
-    position: fixed;   
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 16px 0 #00ffff33;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #00ffff;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .nav-links a {
-    text-decoration: none;
-    color: white;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links a:hover {
-    color: #00ffff;
-  }
-  .page-content, .main-content, .order-page, .products-page {
-    margin-top: 90px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    background: #181818;
-    border-radius: 2rem;
-    box-shadow: 0 4px 32px 0 #00ffff33;
-    padding: 2.5rem 2rem;
-    min-height: 60vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #181a20;
+  box-shadow: 0 0 16px #00ffe7;
+  padding: 12px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.navbar-logo img {
+  height: 40px;
+  width: 40px;
+  border-radius: 8px;
+}
+.navbar-title {
+  color: #00ffe7;
+  font-size: 1.5em;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-btn:hover {
+  background: #00ffe7;
+  color: #181a20;
+}
+.cart-link {
+  position: relative;
+}
+.cart-icon {
+  font-size: 1.2em;
+  margin-right: 4px;
+}
+.cart-count {
+  background: #ff0055;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.9em;
+  margin: 0 6px;
+}
+.cart-total {
+  color: #00ffe7;
+  font-weight: bold;
+  margin-left: 4px;
+} 

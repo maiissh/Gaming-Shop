@@ -1,11 +1,12 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const productsRoutes = require('./routes/products');
+const cartRoutes = require('./routes/cart');
+const ordersRoutes = require('./routes/orders');
 
-const productRoutes = require("./routes/productRoutes");
-const orderRoutes = require("./routes/orderRoutes");
-const categoryRoutes = require("./routes/categoryRoutes");
-const cartRoutes = require("./routes/cartRoutes"); // Add cart routes
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -14,26 +15,23 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use("/api/products", productRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/categories", categoryRoutes);
-app.use("/api/cart", cartRoutes); // Add cart route
+// MongoDB connection
+mongoose.connect('mongodb://localhost:27017/your-db-name', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch((err) => console.error('MongoDB connection error:', err));
 
-// Test route
-app.get("/", (req, res) => {
-    res.json({ message: "Gaming Shop API is running!" });
+// Simple route
+app.get('/', (req, res) => {
+  res.send('Gaming Shop API is running');
 });
 
-// Connect to MongoDB and start server
-mongoose.connect("mongodb://127.0.0.1:27017/gamingshop", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => {
-    console.log("✅ Connected to MongoDB");
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on http://localhost:${PORT}`);
-    });
-}).catch(err => {
-    console.error("❌ MongoDB connection failed:", err);
-});
+app.use('/api/products', productsRoutes);
+app.use('/api/cart', cartRoutes);
+app.use('/api/orders', ordersRoutes);
+
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+}); 
