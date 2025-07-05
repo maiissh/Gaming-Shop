@@ -154,7 +154,7 @@
 }
 
 
-/* 🌐 Responsive for mobile (max-width: 600px) */
+/*  Responsive for mobile  */
 @media (max-width: 600px) {
   .navbar {
     flex-direction: column;

@@ -1,6 +1,6 @@
-
 const Order = require('../models/Order');
 
+// Get all orders
 exports.getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find();
@@ -10,6 +10,7 @@ exports.getAllOrders = async (req, res) => {
   }
 };
 
+// Get single order by ID
 exports.getOrderById = async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
@@ -20,6 +21,7 @@ exports.getOrderById = async (req, res) => {
   }
 };
 
+// Create new order
 exports.createOrder = async (req, res) => {
   try {
     const newOrder = new Order(req.body);

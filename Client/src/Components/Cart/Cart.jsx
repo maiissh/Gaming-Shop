@@ -2,8 +2,8 @@ import React from 'react';
 import './Cart.css';
 
 function Cart({ cart, onUpdateQty, onRemove, onCheckout }) {
+    // Calculate total cart price
   const total = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
-
   return (
     <div className="cart-container">
       <h2>Your Cart</h2>

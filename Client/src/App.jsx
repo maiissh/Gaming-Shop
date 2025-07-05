@@ -5,28 +5,32 @@ import Checkout from './Components/Checkout/Checkout.jsx';
 import './App.css';
 
 function App() {
+  // Products data from API
   const [products, setProducts] = useState([]);
+
+  // Cart state, restored from localStorage
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
 
+  // Current page: 'home', 'products', 'cart', or 'checkout'
   const [page, setPage] = useState('home');
 
-  // 🔁 Load products from backend API
+  // Load products on first render
   useEffect(() => {
     fetch("http://localhost:3000/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data))
-      .catch((err) => console.error("❌ Error fetching products:", err));
+      .catch((err) => console.error("Error fetching products:", err));
   }, []);
 
-  // 💾 Save cart to localStorage
+  // Save cart to localStorage when it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  // ➕ Add item to cart
+  // Add product to cart or increase quantity
   const handleAddToCart = (product) => {
     setCart((prev) => {
       const exists = prev.find(item => item.id === product._id);
@@ -40,30 +44,48 @@ function App() {
     });
   };
 
-  // 🔄 Update quantity
+  // Update item quantity
   const handleUpdateQty = (id, qty) => {
-    setCart(prev => prev.map(item => item.id === id ? { ...item, qty: Math.max(1, qty) } : item));
+    setCart(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, qty: Math.max(1, qty) } : item
+      )
+    );
   };
 
-  // ❌ Remove item
+  // Remove item from cart
   const handleRemove = (id) => {
     setCart(prev => prev.filter(item => item.id !== id));
   };
 
-  // 🧹 Clear cart after order
+  // Clear cart after order is placed
   const clearCart = () => setCart([]);
 
+  // Total items and price
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
   const cartTotal = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
-  // 🌐 Page routing
+  // Render selected page
   const renderPage = () => {
     if (page === 'cart') {
-      return <Cart cart={cart} onUpdateQty={handleUpdateQty} onRemove={handleRemove} onCheckout={() => setPage('checkout')} />;
+      return (
+        <Cart
+          cart={cart}
+          onUpdateQty={handleUpdateQty}
+          onRemove={handleRemove}
+          onCheckout={() => setPage('checkout')}
+        />
+      );
     } else if (page === 'products') {
       return <Products products={products} onAddToCart={handleAddToCart} />;
     } else if (page === 'checkout') {
-      return <Checkout cart={cart} onNavigate={setPage} clearCart={clearCart} />;
+      return (
+        <Checkout
+          cart={cart}
+          onNavigate={setPage}
+          clearCart={clearCart}
+        />
+      );
     } else {
       return <Home products={products} onAddToCart={handleAddToCart} />;
     }
@@ -71,7 +93,12 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar cartCount={cartCount} cartTotal={cartTotal} onNavigate={setPage} />
+      <Navbar
+        cartCount={cartCount}
+        cartTotal={cartTotal}
+        onNavigate={setPage}
+      />
+
       {renderPage()}
 
       <footer style={{
@@ -83,7 +110,7 @@ function App() {
         borderTop: '1px solid #0ff4',
         fontSize: '0.95em'
       }}>
-        © 2025 Gaming World 🎮 | All rights reserved.<br />
+        © 2025 Gaming World | All rights reserved.<br />
         Built with 💻 by Mais & Fatima
       </footer>
     </div>

@@ -1,12 +1,42 @@
-# React + Vite
+# Gaming World Shop 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive React-based shopping web app for gaming products, built as a final project.
 
-Currently, two official plugins are available:
+## 💡 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Browse stylish gaming products
+- Add items to cart with quantity control
+- View cart total and item count
+- Complete a simple checkout form
+- Cart saved in localStorage
+- Neon-inspired animated UI
+- Fully responsive for mobile and desktop
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 18
+- CSS3 (Custom + Animations)
+- JavaScript ES6
+- LocalStorage (for cart persistence)
+- Node.js & Express (backend API)
+- MongoDB (for product storage)
+
+## 🚀 Getting Started
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/your-username/gaming-world.git
+   Install dependencies:
+
+bash
+Copy code
+cd client
+npm install
+Start the development server:
+
+bash
+Copy code
+npm start
+
+✍️ Authors
+Mais & Fatima (Final Web Dev Project @ Sapir College)

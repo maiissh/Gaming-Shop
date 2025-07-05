@@ -74,7 +74,7 @@
   background: #00bfae;
 }
 
-/* 📱 Responsive style for mobile */
+/* Responsive style for mobile */
 @media (max-width: 600px) {
   .cart-container {
     padding: 16px;

@@ -45,7 +45,7 @@
   letter-spacing: 2px;
 }
 
-/* 🌐 Responsive design for mobile */
+/* Responsive design for mobile */
 @media (max-width: 600px) {
   .home-title-anim {
     font-size: 1.8em;
