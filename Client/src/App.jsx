@@ -4,40 +4,29 @@ import Cart from './Components/Cart/Cart.jsx';
 import Checkout from './Components/Checkout/Checkout.jsx';
 import './App.css';
 
-import laptopImg from './assets/laptop.jpg';
-import switchImg from './assets/Console.jpg';
-import pcBlack from './assets/PC black.webp';
-import pcWhite from './assets/PC white.webp';
-import ps5Img from './assets/ps5.webp';
-import ps5Controller from './assets/ps5Controller.webp';
-import keyboardImg from './assets/keyboard.jpg';
-import mouseImg from './assets/mouse.jpg';
-import ledStrip from './assets/led-strip.jpg';
-
 function App() {
-  const staticProducts = [
-    { _id: "1", name: "Acer Predator Gaming Laptop", price: 6499, image: laptopImg },
-    { _id: "2", name: "Nintendo Switch Console", price: 1399, image: switchImg },
-    { _id: "3", name: "RGB Gaming PC - Black", price: 9999, image: pcBlack },
-    { _id: "4", name: "RGB Gaming PC - White", price: 9999, image: pcWhite },
-    { _id: "5", name: "PlayStation 5 Console", price: 2499, image: ps5Img },
-    { _id: "6", name: "PS5 DualSense Controller", price: 349, image: ps5Controller },
-    { _id: "7", name: "RGB Mechanical Keyboard", price: 249, image: keyboardImg },
-    { _id: "8", name: "Ultra-Light Gaming Mouse", price: 129, image: mouseImg },
-    { _id: "9", name: "LED RGB Strip Light", price: 99, image: ledStrip }
-  ];
-
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState(() => {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [page, setPage] = useState('home');
+
+  // 🔁 Load products from backend API
+  useEffect(() => {
+    fetch("http://localhost:3000/api/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch((err) => console.error("❌ Error fetching products:", err));
+  }, []);
+
+  // 💾 Save cart to localStorage
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const [page, setPage] = useState('home');
-
+  // ➕ Add item to cart
   const handleAddToCart = (product) => {
     setCart((prev) => {
       const exists = prev.find(item => item.id === product._id);
@@ -51,28 +40,32 @@ function App() {
     });
   };
 
+  // 🔄 Update quantity
   const handleUpdateQty = (id, qty) => {
     setCart(prev => prev.map(item => item.id === id ? { ...item, qty: Math.max(1, qty) } : item));
   };
 
+  // ❌ Remove item
   const handleRemove = (id) => {
     setCart(prev => prev.filter(item => item.id !== id));
   };
 
+  // 🧹 Clear cart after order
   const clearCart = () => setCart([]);
 
   const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
   const cartTotal = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
+  // 🌐 Page routing
   const renderPage = () => {
     if (page === 'cart') {
       return <Cart cart={cart} onUpdateQty={handleUpdateQty} onRemove={handleRemove} onCheckout={() => setPage('checkout')} />;
     } else if (page === 'products') {
-      return <Products products={staticProducts} onAddToCart={handleAddToCart} />;
+      return <Products products={products} onAddToCart={handleAddToCart} />;
     } else if (page === 'checkout') {
       return <Checkout cart={cart} onNavigate={setPage} clearCart={clearCart} />;
     } else {
-      return <Home products={staticProducts} onAddToCart={handleAddToCart} />;
+      return <Home products={products} onAddToCart={handleAddToCart} />;
     }
   };
 
@@ -91,7 +84,7 @@ function App() {
         fontSize: '0.95em'
       }}>
         © 2025 Gaming World 🎮 | All rights reserved.<br />
-        Built with 💻 by Mais & fatima
+        Built with 💻 by Mais & Fatima
       </footer>
     </div>
   );
