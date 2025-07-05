@@ -12,4 +12,4 @@ function Products({ products, onAddToCart, fadeInRef }) {
   );
 }
 
-export default Products; 
+export default Products;

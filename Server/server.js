@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/GamingShop', {
+mongoose.connect('mongodb://localhost:27017/gamingshop', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
