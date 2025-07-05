@@ -1,0 +1,22 @@
+@media (max-width: 600px) {
+  .product-card {
+    padding: 16px;
+    margin: 8px auto;
+    max-width: 90%;
+  }
+
+  .product-image {
+    max-width: 140px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .product-bottom {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .product-price {
+    font-size: 1em;
+  }
+}

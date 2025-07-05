@@ -1,0 +1,141 @@
+.checkout-container {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #111;
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  padding: 30px;
+  color: #fff;
+  box-shadow: 0 0 25px #0ff3;
+}
+
+.checkout-form label {
+  display: block;
+  margin-bottom: 15px;
+}
+
+.checkout-form input,
+.checkout-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 8px;
+  border: 1px solid #0ff5;
+  background-color: #222; 
+  color: #0ff;            
+  outline: none;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.checkout-form input::placeholder {
+  color: #0ff9; 
+}
+
+.checkout-form input:focus,
+.checkout-form select:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 8px #0ff4;
+}
+
+
+.confirm-btn {
+  background-color: #0ff;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.confirm-btn:hover {
+  background-color: #00f2ff;
+  transform: scale(1.05);
+}
+
+.total-box {
+  margin-top: 20px;
+  background: #1c1c1c;
+  border: 1px solid #0ff6;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.total-box p {
+  margin: 5px 0;
+}
+
+.grand-total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0ff;
+}
+
+.checkout-success {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #111;
+  border: 2px solid #0ff;
+  color: #0ff;
+  padding: 20px 30px;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 999;
+  border-radius: 12px;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+.checkout-form select {
+  appearance: none;
+  background-color: #222;
+  color: #0ff;
+  border: 1px solid #0ff5;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.checkout-form select:hover {
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff4;
+}
+@media (max-width: 600px) {
+  .checkout-container {
+    margin: 20px 10px;
+    padding: 20px;
+  }
+
+  .checkout-form input,
+  .checkout-form select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .confirm-btn {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .total-box {
+    padding: 10px;
+  }
+
+  .checkout-success {
+    width: 90%;
+    font-size: 18px;
+    padding: 16px;
+  }
+}
+

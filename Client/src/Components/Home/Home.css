@@ -6,6 +6,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #181a20 60%, #232946 100%);
 }
+
 .home-title-anim {
   font-size: 2.5em;
   font-weight: bold;
@@ -15,10 +16,12 @@
   text-shadow: 0 0 16px #00ffe7, 0 0 32px #232946;
   animation: neon-flicker 2s infinite alternate;
 }
+
 @keyframes neon-flicker {
   0% { opacity: 1; }
   100% { opacity: 0.85; text-shadow: 0 0 32px #00ffe7, 0 0 64px #232946; }
 }
+
 .home-setup-main {
   width: 100%;
   max-width: 600px;
@@ -26,16 +29,43 @@
   margin-bottom: 32px;
   box-shadow: 0 0 32px #00ffe7;
 }
+
 .home-products {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 16px;
 }
+
 .home-products-title {
   color: #fff;
   font-size: 2em;
   margin-bottom: 16px;
   text-align: center;
   letter-spacing: 2px;
-} 
+}
+
+/* 🌐 Responsive design for mobile */
+@media (max-width: 600px) {
+  .home-title-anim {
+    font-size: 1.8em;
+    text-align: center;
+    margin: 12px;
+  }
+
+  .home-setup-main {
+    max-width: 90%;
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+
+  .home-products-title {
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+
+  .home-products {
+    padding: 0 12px;
+  }
+}
