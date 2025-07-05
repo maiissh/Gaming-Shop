@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+const Product = require('../models/Product');
 
 exports.getAllProducts = async (_req, res) => {
   try {
@@ -48,4 +48,13 @@ exports.deleteProduct = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-}; 
+}; exports.getAllProducts = async (_req, res) => {
+  try {
+    const products = await Product.find();
+    console.log("🛍 Products from DB:", products); // <--- ADD THIS LINE
+    res.json(products);
+  } catch (err) {
+    console.error("❌ Failed to get products:", err);
+    res.status(500).json({ error: err.message });
+  }
+};

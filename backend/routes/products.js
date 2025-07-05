@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const cartController = require('../controllers/cart');
+const productsController = require('../controllers/products');
 
-router.get('/', cartController.getCart);
-router.put('/', cartController.updateCart);
-router.delete('/', cartController.clearCart);
+// Add this missing route:
+router.get('/', productsController.getAllProducts);
 
-module.exports = router; 
+// Existing routes:
+router.get('/:id', productsController.getProductById);
+router.post('/', productsController.createProduct);
+router.put('/:id', productsController.updateProduct);
+router.delete('/:id', productsController.deleteProduct);
+
+module.exports = router;
