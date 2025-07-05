@@ -31,18 +31,20 @@ function App() {
   }, [cart]);
 
   // Add product to cart or increase quantity
-  const handleAddToCart = (product) => {
-    setCart((prev) => {
-      const exists = prev.find(item => item.id === product._id);
-      if (exists) {
-        return prev.map(item =>
-          item.id === product._id ? { ...item, qty: item.qty + 1 } : item
-        );
-      } else {
-        return [...prev, { ...product, id: product._id, qty: 1 }];
-      }
-    });
-  };
+ const handleAddToCart = (product) => {
+  console.log("🛒 Product being added:", product);
+  setCart((prev) => {
+    const exists = prev.find(item => item.id === product._id);
+    if (exists) {
+      return prev.map(item =>
+        item.id === product._id ? { ...item, qty: item.qty + 1 } : item
+      );
+    } else {
+      return [...prev, { ...product, id: product._id, qty: 1 }];
+    }
+  });
+};
+
 
   // Update item quantity
   const handleUpdateQty = (id, qty) => {

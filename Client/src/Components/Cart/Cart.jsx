@@ -26,7 +26,7 @@ function Cart({ cart, onUpdateQty, onRemove, onCheckout }) {
               {cart.map((item) => (
                 <tr key={item.id}>
                   <td>
-                    <img src={item.image} alt={item.name} className="cart-img" />
+                  <img src={`/images/${item.image}`} alt={item.name} className="cart-img" />
                   </td>
                   <td>{item.name}</td>
                   <td>
