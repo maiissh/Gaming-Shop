@@ -41,7 +41,6 @@ body {
 }
 
 .navbar-links {
-  display: flex;
   list-style: none;
   gap: 2rem;
   margin: 0;
@@ -91,11 +90,6 @@ body {
 @media (max-width: 600px) {
   .products-grid {
     grid-template-columns: 1fr;
-  }
-  .navbar {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
   }
 }
 

@@ -3,6 +3,7 @@ import { Navbar, Products, Home } from './Components';
 import Cart from './Components/Cart/Cart.jsx';
 import Checkout from './Components/Checkout/Checkout.jsx';
 import './App.css';
+import { getProducts } from './services/api';
 
 function App() {
   // Products data from API
@@ -18,12 +19,11 @@ function App() {
   const [page, setPage] = useState('home');
 
   // Load products on first render
-  useEffect(() => {
-    fetch("http://localhost:3000/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error("Error fetching products:", err));
-  }, []);
+ useEffect(() => {
+  getProducts()
+    .then(setProducts)
+    .catch((err) => console.error("Error fetching products:", err));
+}, []);
 
   // Save cart to localStorage when it changes
   useEffect(() => {

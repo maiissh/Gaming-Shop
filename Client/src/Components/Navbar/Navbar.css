@@ -15,6 +15,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
 }
 
 .navbar-logo img {
@@ -32,10 +33,24 @@
 
 .navbar-links {
   display: flex;
-  align-items: center;
-  gap: 24px;
   list-style: none;
+  gap: 2rem;
   margin: 0;
+  padding: 0;
+}
+
+/* This hides the navbar links on mobile */
+.navbar-links.hide-menu {
+  display: none !important;
+}
+
+/* This shows the menu when toggled on mobile */
+.navbar-links.show-menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  background: none;
   padding: 0;
 }
 
@@ -60,35 +75,14 @@
   position: relative;
 }
 
-.cart-icon {
-  font-size: 1.2em;
-  margin-right: 4px;
-}
-
-.cart-count {
+.cart-count, .cart-total {
   color: #fff;
-  margin: 0 4px;
+  margin-left: 6px;
   font-weight: bold;
 }
-
-.cart-total {
-  color: #fff;
-  margin-left: 8px;
-  font-weight: bold;
-}
-
-.checkout-link {
-  color: #181a20;
-  font-weight: bold;
-  border-radius: 8px;
-  padding: 6px 12px;
-  border: none;
-  transition: background-color 0.3s ease;
-  box-shadow: none; 
-}
-
 
 .checkout-btn-navbar {
+  background: #00ffe7;
   color: #181a20;
   border: none;
   border-radius: 8px;
@@ -100,16 +94,8 @@
 }
 
 .checkout-btn-navbar:hover {
-  color: #fff;
-}
-
-@keyframes cart-bounce {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
-.cart-bounce {
-  animation: cart-bounce 0.3s ease-in-out;
+  background: #fff;
+  color: #00ffe7;
 }
 
 .menu-toggle {
@@ -117,30 +103,22 @@
   font-size: 2rem;
   color: #00ffe7;
   cursor: pointer;
+  margin-left: auto; 
 }
+/* Mobile styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
 
-@media (max-width: 600px) {
   .navbar {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .menu-toggle {
-    display: block;
-    align-self: flex-end;
-    margin-top: 10px;
-  }
-
   .navbar-links {
-    display: none;
     flex-direction: column;
     width: 100%;
-    margin-top: 10px;
-    gap: 10px;
-  }
-
-  .navbar-links.show-menu {
-    display: flex;
   }
 
   .navbar-links li {
@@ -150,41 +128,5 @@
   .nav-btn {
     width: 100%;
     text-align: left;
-  }
-}
-
-
-/*  Responsive for mobile  */
-@media (max-width: 600px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px;
-  }
-
-  .navbar-logo {
-    margin-bottom: 12px;
-  }
-
-  .navbar-title {
-    font-size: 1.2em;
-  }
-
-  .navbar-links {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .nav-btn {
-    width: 100%;
-    text-align: left;
-    padding: 10px 12px;
-  }
-
-  .cart-total {
-    display: inline-block;
-    margin-top: 4px;
   }
 }
